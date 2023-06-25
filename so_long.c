@@ -6,7 +6,7 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:49:30 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/25 01:31:26 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/25 05:40:20 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,141 +55,80 @@ static void	ft_render_overlap(t_mlx *mlx);
 // Funciones que reciben los inputs introducidos mediante la función mx_hook
 // mediante las cuales se moverá el personaje.
 static int	ft_input(int keycode, t_mlx *mlx);
-static void	ft_move_up(t_mlx *mlx);
-static void	ft_move_down(t_mlx *mlx);
-static void	ft_move_left(t_mlx *mlx);
-static void	ft_move_right(t_mlx *mlx);
+static void	ft_move(t_mlx *mlx, int mod_y, int mod_x);
+static void	ft_move_to_element(t_mlx *mlx, int mod_y, int mod_x);
+static void	ft_move_who_am_i(t_mlx *mlx, int mod_y, int mod_x);
+static void	ft_move_print_total_moves(t_mlx *mlx);
 
-static void	ft_move_right(t_mlx *mlx)
+static void	ft_move_print_total_moves(t_mlx *mlx)
 {
-	if (mlx->playable_map[mlx->p_y][mlx->p_x + 1] != '1')
+	mlx->move_count++;
+	ft_printf("Total moves: %i\n", mlx->move_count);
+}
+
+static void	ft_move_to_element(t_mlx *mlx, int mod_y, int mod_x)
+{
+	if (mlx->playable_map[mlx->p_y + mod_y][mlx->p_x + mod_x] == 'C')
+		mlx->count_c--;
+	else if (mlx->playable_map[mlx->p_y + mod_y][mlx->p_x + mod_x] == 'E')
 	{
-		if (mlx->playable_map[mlx->p_y][mlx->p_x + 1] == 'C')
-			mlx->count_c--;
-		else if (mlx->playable_map[mlx->p_y][mlx->p_x + 1] == 'E')
+		if (mlx->count_c == 0)
 		{
-			if (mlx->count_c == 0)
-				exit(0);
-			mlx->playable_map[mlx->p_y][mlx->p_x] = '0';
-			mlx->playable_map[mlx->p_y][mlx->p_x + 1] = 'o';
+			ft_move_print_total_moves(mlx);
+			exit(0);
 		}
-		if (mlx->playable_map[mlx->p_y][mlx->p_x] == 'P')
-		{
-			mlx->playable_map[mlx->p_y][mlx->p_x] = '0';
-			mlx->playable_map[mlx->p_y][mlx->p_x + 1] = 'P';
-		}
-		else if (mlx->playable_map[mlx->p_y][mlx->p_x] == 'o')
-		{
-			mlx->playable_map[mlx->p_y][mlx->p_x] = 'E';
-			mlx->playable_map[mlx->p_y][mlx->p_x + 1] = 'P';
-		}
-		mlx->move_count++;
-		ft_printf("Total moves: %i\n", mlx->move_count);
-		ft_render(mlx);
-		ft_print_matrix(mlx->playable_map, "playable_map");
+		mlx->playable_map[mlx->p_y][mlx->p_x] = '0';
+		mlx->playable_map[mlx->p_y + mod_y][mlx->p_x + mod_x] = 'o';
 	}
 }
 
-static void	ft_move_left(t_mlx *mlx)
+static void	ft_move_who_am_i(t_mlx *mlx, int mod_y, int mod_x)
 {
-	if (mlx->playable_map[mlx->p_y][mlx->p_x - 1] != '1')
+	if (mlx->playable_map[mlx->p_y][mlx->p_x] == 'P')
 	{
-		if (mlx->playable_map[mlx->p_y][mlx->p_x - 1] == 'C')
-			mlx->count_c--;
-		else if (mlx->playable_map[mlx->p_y][mlx->p_x - 1] == 'E')
-		{
-			if (mlx->count_c == 0)
-				exit(0);
-			mlx->playable_map[mlx->p_y][mlx->p_x] = '0';
-			mlx->playable_map[mlx->p_y][mlx->p_x - 1] = 'o';
-		}
-		if (mlx->playable_map[mlx->p_y][mlx->p_x] == 'P')
-		{
-			mlx->playable_map[mlx->p_y][mlx->p_x] = '0';
-			mlx->playable_map[mlx->p_y][mlx->p_x - 1] = 'P';
-		}
-		else if (mlx->playable_map[mlx->p_y][mlx->p_x] == 'o')
-		{
-			mlx->playable_map[mlx->p_y][mlx->p_x] = 'E';
-			mlx->playable_map[mlx->p_y][mlx->p_x - 1] = 'P';
-		}
-		mlx->move_count++;
-		ft_printf("Total moves: %i\n", mlx->move_count);
-		ft_render(mlx);
-		ft_print_matrix(mlx->playable_map, "playable_map");
+		mlx->playable_map[mlx->p_y][mlx->p_x] = '0';
+		mlx->playable_map[mlx->p_y + mod_y][mlx->p_x + mod_x] = 'P';
+	}
+	else if (mlx->playable_map[mlx->p_y][mlx->p_x] == 'o')
+	{
+		mlx->playable_map[mlx->p_y][mlx->p_x] = 'E';
+		mlx->playable_map[mlx->p_y + mod_y][mlx->p_x + mod_x] = 'P';
 	}
 }
 
-static void	ft_move_down(t_mlx *mlx)
+static void	ft_move(t_mlx *mlx, int mod_y, int mod_x)
 {
-	if (mlx->playable_map[mlx->p_y + 1][mlx->p_x] != '1')
+	if (mlx->playable_map[mlx->p_y + mod_y][mlx->p_x + mod_x] != '1')
 	{
-		if (mlx->playable_map[mlx->p_y + 1][mlx->p_x] == 'C')
-			mlx->count_c--;
-		else if (mlx->playable_map[mlx->p_y + 1][mlx->p_x] == 'E')
-		{
-			if (mlx->count_c == 0)
-				exit(0);
-			mlx->playable_map[mlx->p_y][mlx->p_x] = '0';
-			mlx->playable_map[mlx->p_y + 1][mlx->p_x] = 'o';
-		}
-		if (mlx->playable_map[mlx->p_y][mlx->p_x] == 'P')
-		{
-			mlx->playable_map[mlx->p_y][mlx->p_x] = '0';
-			mlx->playable_map[mlx->p_y + 1][mlx->p_x] = 'P';
-		}
-		else if (mlx->playable_map[mlx->p_y][mlx->p_x] == 'o')
-		{
-			mlx->playable_map[mlx->p_y][mlx->p_x] = 'E';
-			mlx->playable_map[mlx->p_y + 1][mlx->p_x] = 'P';
-		}
-		mlx->move_count++;
-		ft_printf("Total moves: %i\n", mlx->move_count);
+		ft_move_to_element(mlx, mod_y, mod_x);
+		ft_move_who_am_i(mlx, mod_y, mod_x);
+		ft_move_print_total_moves(mlx);
 		ft_render(mlx);
-		ft_print_matrix(mlx->playable_map, "playable_map");
-	}
-}
-
-static void	ft_move_up(t_mlx *mlx)
-{
-	if (mlx->playable_map[mlx->p_y - 1][mlx->p_x] != '1')
-	{
-		if (mlx->playable_map[mlx->p_y - 1][mlx->p_x] == 'C')
-			mlx->count_c--;
-		else if (mlx->playable_map[mlx->p_y - 1][mlx->p_x] == 'E')
-		{
-			if (mlx->count_c == 0)
-				exit(0);
-			mlx->playable_map[mlx->p_y][mlx->p_x] = '0';
-			mlx->playable_map[mlx->p_y - 1][mlx->p_x] = 'o';
-		}
-		if (mlx->playable_map[mlx->p_y][mlx->p_x] == 'P')
-		{
-			mlx->playable_map[mlx->p_y][mlx->p_x] = '0';
-			mlx->playable_map[mlx->p_y - 1][mlx->p_x] = 'P';
-		}
-		else if (mlx->playable_map[mlx->p_y][mlx->p_x] == 'o')
-		{
-			mlx->playable_map[mlx->p_y][mlx->p_x] = 'E';
-			mlx->playable_map[mlx->p_y - 1][mlx->p_x] = 'P';
-		}
-		mlx->move_count++;
-		ft_printf("Total moves: %i\n", mlx->move_count);
-		ft_render(mlx);
-		ft_print_matrix(mlx->playable_map, "playable_map");
 	}
 }
 
 int	ft_input(int keycode, t_mlx *mlx)
 {
 	if (keycode == W || keycode == UP)
-		ft_move_up(mlx);
+	{
+		ft_move(mlx, -1, 0);
+		ft_render(mlx);
+	}
 	if (keycode == S || keycode == DOWN)
-		ft_move_down(mlx);
+	{
+		ft_move(mlx, 1, 0);
+		ft_render(mlx);
+	}
 	if (keycode == A || keycode == LEFT)
-		ft_move_left(mlx);
+	{
+		ft_move(mlx, 0, -1);
+		ft_render(mlx);
+	}
 	if (keycode == D || keycode == RIGHT)
-		ft_move_right(mlx);
+	{
+		ft_move(mlx, 0, 1);
+		ft_render(mlx);
+	}
 	if (keycode == ESC)
 		exit(0);
 	return(0);
@@ -541,7 +480,7 @@ static int	ft_mlx(t_mlx *mlx)
 	ft_create_window(mlx);
 	ft_img_init(mlx);
 	ft_render(mlx);
-//	mlx->move_count = 0;
+	mlx->move_count = 0;
 	mlx_key_hook(mlx->win_ptr, ft_input, mlx);
 	mlx_loop(mlx->mlx_ptr);
 	return (0);
@@ -568,9 +507,14 @@ static void	ft_make_matrix(t_mlx *mlx)
 
 static int	ft_comp_map_route(int argc, char **argv, t_mlx *mlx)
 {
+	size_t	len;
+
+	len = ft_strlen(argv[1]);
 	if (argc != 2)
 		return (ft_printf("Error\n[x] Número de argumentos inválido, pelotudo.\n"), 0);
-	if(!ft_strnstr(argv[1], ".ber\0", -1))
+	if (len <= ft_strlen("maps/.ber"))
+			return (ft_printf("Error\n[x] El mapa introducido tiene un nombre muy corto.\n"), 0);
+	if (ft_strncmp(argv[1] + len - 4, ".ber", -1) != 0)
 		return (ft_printf("Error\n[x] El mapa introducido no es un '.ber'.\n"), 0);
 	mlx->fd = open(argv[1], O_RDONLY);
 	if (mlx->fd == -1)
