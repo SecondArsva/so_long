@@ -6,7 +6,7 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:49:30 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/25 05:40:20 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/25 05:54:39 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int	ft_input(int keycode, t_mlx *mlx)
 	}
 	if (keycode == ESC)
 		exit(0);
-	return(0);
+	return (0);
 }
 
 static void	ft_render_overlap(t_mlx *mlx)
@@ -148,9 +148,9 @@ static void	ft_render_overlap(t_mlx *mlx)
 			if (mlx->playable_map[i][j] == 'o')
 			{
 				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_e,
-						j * IMG_WIDTH, i * IMG_HEIGHT);
+					j * IMG_WIDTH, i * IMG_HEIGHT);
 				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_p,
-						j * IMG_WIDTH, i * IMG_HEIGHT);
+					j * IMG_WIDTH, i * IMG_HEIGHT);
 				mlx->p_y = i;
 				mlx->p_x = j;
 			}
@@ -175,7 +175,7 @@ static void	ft_render_player(t_mlx *mlx)
 			if (mlx->playable_map[i][j] == 'P')
 			{
 				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_p,
-						j * IMG_WIDTH, i * IMG_HEIGHT);
+					j * IMG_WIDTH, i * IMG_HEIGHT);
 				mlx->p_y = i;
 				mlx->p_x = j;
 			}
@@ -200,7 +200,7 @@ static void	ft_render_exit(t_mlx *mlx)
 			if (mlx->playable_map[i][j] == 'E')
 			{
 				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_e,
-						j * IMG_WIDTH, i * IMG_HEIGHT);
+					j * IMG_WIDTH, i * IMG_HEIGHT);
 			}
 			j++;
 		}
@@ -223,7 +223,7 @@ static void	ft_render_collectable(t_mlx *mlx)
 			if (mlx->playable_map[i][j] == 'C')
 			{
 				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_c,
-						j * IMG_WIDTH, i * IMG_HEIGHT);
+					j * IMG_WIDTH, i * IMG_HEIGHT);
 			}
 			j++;
 		}
@@ -246,7 +246,7 @@ static void	ft_render_wall(t_mlx *mlx)
 			if (mlx->playable_map[i][j] == '1')
 			{
 				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_1,
-						j * IMG_WIDTH, i * IMG_HEIGHT);
+					j * IMG_WIDTH, i * IMG_HEIGHT);
 			}
 			j++;
 		}
@@ -267,7 +267,7 @@ static void	ft_render_floor(t_mlx *mlx)
 		while (mlx->playable_map[i][j])
 		{
 			mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_0,
-					j * IMG_WIDTH, i * IMG_HEIGHT);
+				j * IMG_WIDTH, i * IMG_HEIGHT);
 			j++;
 		}
 		j = 0;
@@ -323,12 +323,12 @@ static void	ft_flood_fill_if(char **matrix, char *str, size_t i, size_t j)
 	if (!ft_strchr(str, matrix[i][j - 1]))
 	{
 		matrix[i][j - 1] = str[0];
-		ft_flood_fill_if(matrix, str, i , j - 1);
+		ft_flood_fill_if(matrix, str, i, j - 1);
 	}
 	if (!ft_strchr(str, matrix[i][j + 1]))
 	{
 		matrix[i][j + 1] = str[0];
-		ft_flood_fill_if(matrix, str, i , j + 1);
+		ft_flood_fill_if(matrix, str, i, j + 1);
 	}
 }
 
@@ -395,8 +395,8 @@ static int	ft_comp_map_rectangle(t_mlx *mlx)
 	while (axis_y-- > 0)
 	{
 		comp_val = ft_strlen(mlx->playable_map[i]);
-		if(comp_val != size_ref)
-			return(ft_printf("Error\n[x] El mapa no es rectangular.\n"), 0);
+		if (comp_val != size_ref)
+			return (ft_printf("Error\n[x] El mapa no es rectangular.\n"), 0);
 		i++;
 	}
 	mlx->map_len_x = size_ref;
@@ -432,7 +432,7 @@ static int	ft_comp_map_count_elements(t_mlx *mlx)
 	{
 		while (mlx->playable_map[i][j])
 		{
-			if (!ft_strchr("01CEP" , mlx->playable_map[i][j]))
+			if (!ft_strchr("01CEP", mlx->playable_map[i][j]))
 				return (ft_printf("Error\n[x] El mapa tiene carácteres inválidos.\n"), 0);
 			if (mlx->playable_map[i][j] == 'C')
 				mlx->count_c++;
@@ -452,21 +452,20 @@ static void	ft_img_init(t_mlx *mlx)
 {
 	mlx->img_width = IMG_WIDTH;
 	mlx->img_height = IMG_HEIGHT;
-
 	mlx->img_0 = mlx_xpm_file_to_image(mlx->mlx_ptr, IMG_0, &mlx->img_width, &mlx->img_height);
 	mlx->img_1 = mlx_xpm_file_to_image(mlx->mlx_ptr, IMG_1, &mlx->img_width, &mlx->img_height);
 	mlx->img_c = mlx_xpm_file_to_image(mlx->mlx_ptr, IMG_C, &mlx->img_width, &mlx->img_height);
 	mlx->img_e = mlx_xpm_file_to_image(mlx->mlx_ptr, IMG_E, &mlx->img_width, &mlx->img_height);
 	mlx->img_p = mlx_xpm_file_to_image(mlx->mlx_ptr, IMG_P, &mlx->img_width, &mlx->img_height);
-	if ((!mlx->img_0) || (!mlx->img_1) || (!mlx->img_c) ||
-			 (!mlx->img_e) || (!mlx->img_p))
-		 exit(EXIT_FAILURE);
+	if ((!mlx->img_0) || (!mlx->img_1) || (!mlx->img_c)
+		|| (!mlx->img_e) || (!mlx->img_p))
+		exit(EXIT_FAILURE);
 }
 
 static int	ft_create_window(t_mlx *mlx)
 {
 	mlx->win_x = mlx->map_len_x * IMG_WIDTH;
-	mlx->win_y = mlx->map_len_y * IMG_HEIGHT;;
+	mlx->win_y = mlx->map_len_y * IMG_HEIGHT;
 	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, mlx->win_x, mlx->win_y, WIN_TITLE);
 	if (!mlx->win_ptr)
 		return (ft_printf("Error\n[x] El puntero de la ventana no se ha creado.\n"), 0);
@@ -476,7 +475,6 @@ static int	ft_create_window(t_mlx *mlx)
 static int	ft_mlx(t_mlx *mlx)
 {
 	mlx->mlx_ptr = mlx_init();
-
 	ft_create_window(mlx);
 	ft_img_init(mlx);
 	ft_render(mlx);
@@ -513,7 +511,7 @@ static int	ft_comp_map_route(int argc, char **argv, t_mlx *mlx)
 	if (argc != 2)
 		return (ft_printf("Error\n[x] Número de argumentos inválido, pelotudo.\n"), 0);
 	if (len <= ft_strlen("maps/.ber"))
-			return (ft_printf("Error\n[x] El mapa introducido tiene un nombre muy corto.\n"), 0);
+		return (ft_printf("Error\n[x] El mapa introducido tiene un nombre muy corto.\n"), 0);
 	if (ft_strncmp(argv[1] + len - 4, ".ber", -1) != 0)
 		return (ft_printf("Error\n[x] El mapa introducido no es un '.ber'.\n"), 0);
 	mlx->fd = open(argv[1], O_RDONLY);
@@ -548,6 +546,7 @@ void	ft_leaks(void)
 	system("leaks -q so_long");
 }
 */
+
 int	main(int argc, char *argv[])
 {
 	t_mlx	*mlx;
