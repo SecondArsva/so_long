@@ -6,7 +6,7 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:49:47 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/26 08:27:45 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/26 10:31:38 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,23 @@
 # define LEFT 123
 # define RIGHT 124
 
-# define ERROR_00 "Error\n"
-# define ERROR_01
-# define ERROR_02
-# define ERROR_03
-# define ERROR_04
-# define ERROR_05
-# define ERROR_06
-# define ERROR_07
-# define ERROR_08
-# define ERROR_09
-# define ERROR_10
-# define ERROR_11
-# define ERROR_12
+# define ERROR_STRUCT_RESERVE "Error\n[x] Struct reserve failed."
+# define ERROR_INVALID_ARGS	"Error\n[x] Invalid number of arguments."
+# define ERROR_MAP_NAME "Error\n[x] The introduced map has a very short name."
+# define ERROR_BER "Error\n[x] The introduced map is not a '.ber'."
+# define ERROR_INVALID_FD "Error\n[x] The file could not be opened correctly."
+# define ERROR_WIN_PTR "Error\n[x] Window pointer reserve failed."
+# define ERROR_IMG_PTR "Error\n[x] Some of the images could not be reserved."
+# define ERROR_IVALID_CHAR "Error\n[x] The map has invalid characters."
+# define ERROR_NO_C "Error\n[x] There must be at least one collectible."
+# define ERROR_NO_E	"Error\n[x] Need to add the exit"
+# define ERROR_A_LOT_E "Error\n[x] There can only be one exit."
+# define ERROR_NO_P "Error\n[x] Need to add the character."
+# define ERROR_A_LOT_P "Error\n[x] There can only be one player."
+# define ERROR_MAP_ISNT_RECTANGLE "Error\n[x] The map is not rectangular."
+# define ERROR_SORROUNDED "Error\n[x] The map is not surrounded by walls."
+# define ERROR_REACH_E "Error\n[x] The exit cannot be reached."
+# define ERROR_REACH_C "Error\n[x] Cannot reach any of the collectibles."
 
 typedef struct s_mlx{
 	int		fd;

@@ -6,7 +6,7 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:49:30 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/26 08:31:02 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/26 10:31:36 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -546,17 +546,12 @@ static int	ft_comp_map_route(int argc, char **argv, t_mlx *mlx)
 	mlx->fd = open(argv[1], O_RDONLY);
 	if (mlx->fd == -1)
 		return (ft_printf("Error\n[x] No se pudo abrir el archivo correctamente.\n"), 0);
-	ft_printf("[v] El mapa elegido es el %s\n", argv[1]);
-	ft_printf("fd = %i\n", mlx->fd);
 	return (1);
 }
 
 static int	ft_comp_map(t_mlx *mlx)
 {
-	system("leaks -q so_long");
-	ft_printf("888888888888888\n");
 	ft_make_matrix(mlx);
-	system("leaks -q so_long");
 	if (!ft_comp_map_count_elements(mlx))
 		return (0);
 	if (!ft_comp_map_elements(mlx))
