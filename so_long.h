@@ -6,7 +6,7 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:49:47 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/24 22:37:07 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/26 08:27:45 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,20 @@
 # define DOWN 125
 # define LEFT 123
 # define RIGHT 124
+
+# define ERROR_00 "Error\n"
+# define ERROR_01
+# define ERROR_02
+# define ERROR_03
+# define ERROR_04
+# define ERROR_05
+# define ERROR_06
+# define ERROR_07
+# define ERROR_08
+# define ERROR_09
+# define ERROR_10
+# define ERROR_11
+# define ERROR_12
 
 typedef struct s_mlx{
 	int		fd;

@@ -6,7 +6,7 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:49:30 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/25 05:54:39 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/26 08:31:02 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,23 @@ static void	ft_move(t_mlx *mlx, int mod_y, int mod_x);
 static void	ft_move_to_element(t_mlx *mlx, int mod_y, int mod_x);
 static void	ft_move_who_am_i(t_mlx *mlx, int mod_y, int mod_x);
 static void	ft_move_print_total_moves(t_mlx *mlx);
+// Función para printear los errores.
+//static void	ft_print_error(char *str);
+// mpizzolo me enseñó esto. Es para cerrar la ventana con la "x".
+int	ft_close_window(t_mlx *mlx);
+
+int	ft_close_window(t_mlx *mlx)
+{
+	mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
+	exit(EXIT_FAILURE);
+}
+/*
+static void	ft_print_error(char *str)
+{
+	ft_putendl_fd(str, 2);
+	exit(1);
+}
+*/
 
 static void	ft_move_print_total_moves(t_mlx *mlx)
 {
@@ -459,7 +476,10 @@ static void	ft_img_init(t_mlx *mlx)
 	mlx->img_p = mlx_xpm_file_to_image(mlx->mlx_ptr, IMG_P, &mlx->img_width, &mlx->img_height);
 	if ((!mlx->img_0) || (!mlx->img_1) || (!mlx->img_c)
 		|| (!mlx->img_e) || (!mlx->img_p))
+	{
+		ft_printf("Error\n[x] No se pudo crear correctamente alguna de las imágenes.\n");
 		exit(EXIT_FAILURE);
+	}
 }
 
 static int	ft_create_window(t_mlx *mlx)
@@ -480,6 +500,7 @@ static int	ft_mlx(t_mlx *mlx)
 	ft_render(mlx);
 	mlx->move_count = 0;
 	mlx_key_hook(mlx->win_ptr, ft_input, mlx);
+	mlx_hook(mlx->win_ptr, 17, 0, ft_close_window, mlx);
 	mlx_loop(mlx->mlx_ptr);
 	return (0);
 }
@@ -488,28 +509,36 @@ static void	ft_make_matrix(t_mlx *mlx)
 {
 	char	*single_line;
 	char	*map_line;
+	char	*aux_ref;
 
 	single_line = get_next_line(mlx->fd);
-	map_line = "";
+	map_line = ft_calloc(1, sizeof(char));
 	mlx->map_len_y = 0;
 	while (single_line)
 	{
+		aux_ref = map_line;
 		map_line = ft_strjoin(map_line, single_line);
+		free(aux_ref);
+		free(single_line);
 		mlx->map_len_y++;
 		single_line = get_next_line(mlx->fd);
 		if (single_line == NULL)
 			break ;
 	}
+	free(single_line);
 	mlx->playable_map = ft_split(map_line, '\n');
+	if (!mlx->playable_map)
+		ft_free_matrix(mlx->playable_map);
+	free(map_line);
 }
 
 static int	ft_comp_map_route(int argc, char **argv, t_mlx *mlx)
 {
 	size_t	len;
 
-	len = ft_strlen(argv[1]);
 	if (argc != 2)
 		return (ft_printf("Error\n[x] Número de argumentos inválido, pelotudo.\n"), 0);
+	len = ft_strlen(argv[1]);
 	if (len <= ft_strlen("maps/.ber"))
 		return (ft_printf("Error\n[x] El mapa introducido tiene un nombre muy corto.\n"), 0);
 	if (ft_strncmp(argv[1] + len - 4, ".ber", -1) != 0)
@@ -524,7 +553,10 @@ static int	ft_comp_map_route(int argc, char **argv, t_mlx *mlx)
 
 static int	ft_comp_map(t_mlx *mlx)
 {
+	system("leaks -q so_long");
+	ft_printf("888888888888888\n");
 	ft_make_matrix(mlx);
+	system("leaks -q so_long");
 	if (!ft_comp_map_count_elements(mlx))
 		return (0);
 	if (!ft_comp_map_elements(mlx))
@@ -536,22 +568,18 @@ static int	ft_comp_map(t_mlx *mlx)
 	mlx->flood_filled_map = ft_matrixdup(mlx->playable_map);
 	ft_comp_map_flood_fill(mlx->flood_filled_map, "P1");
 	if (!ft_comp_map_beateable(mlx))
+	{
+		ft_free_matrix(mlx->flood_filled_map);
 		return (0);
+	}
 	ft_free_matrix(mlx->flood_filled_map);
 	return (1);
 }
-/*
-void	ft_leaks(void)
-{
-	system("leaks -q so_long");
-}
-*/
 
 int	main(int argc, char *argv[])
 {
 	t_mlx	*mlx;
 
-//	atexit(ft_leaks);
 	mlx = ft_calloc(1, sizeof(t_mlx));
 	if (!mlx)
 		return (ft_printf("Error\nFallo al hacer la reserva del struct."), 0);
