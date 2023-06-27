@@ -6,35 +6,33 @@
 #    By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/04 14:06:19 by davidga2          #+#    #+#              #
-#    Updated: 2023/06/27 07:21:59 by davidga2         ###   ########.fr        #
+#    Updated: 2023/06/28 00:13:42 by davidga2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# --- VARIABLES ---
+### VARIABLES ###
 
 NAME = so_long
-SRC_DIR = src
-SRC = $(SRC_DIR/%.c)
-OBJS = $(SRC%.c=%.o)
+SRC = src/comp_map_calls_0.c 	\
+	  src/comp_map_calls_1.c 	\
+	  src/input_calls.c 		\
+	  src/main.c 				\
+	  src/main_calls.c 			\
+	  src/mlx_calls.c 			\
+	  src/render.c 				\
+	  src/render_calls_0.c 		\
+	  src/render_calls_1.c
+OBJS = $(SRC:%.c=%.o)
 CC = cc
-CCFLAGS = -Wall -Wextra -Werror
+CCFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
 MLX_MAC = -lmlx -framework OpenGL -framework AppKit
 RM = rm -f
-LIBFT_DIR = libft
-LIBFT = $(LIBFT_DIR)/libft.a
-HEADERS = $(SRC_DIR)/so_long.h
+LIBFT_DIR = libft/
+LIBFT = $(LIBFT_DIR)libft.a
 
-NAME_BONUS = so_long_bonus
-BONUS_DIR = bonus
-SCR_BONUS = $(BONUS_DIR%bonus.c)
-
-# --- RULES ---
+### RULES ###
 
 all: $(NAME)
-
-lib: $(LIBFT)
-
-bonus: $(NAME_BONUS)
 
 $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CCFLAGS) $(MLX_MAC) $(SRC) $(LIBFT) -o $(NAME)
@@ -42,7 +40,7 @@ $(NAME): $(OBJS) $(LIBFT)
 $(LIBFT):
 	make -C $(LIBFT_DIR)
 
-%.o: %.c $(HEADERS)
+%.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
@@ -56,4 +54,4 @@ fclean: clean
 re: fclean all
 	$(MAKE) re -C $(LIBFT_DIR)
 
-.PHONY: all clean fclean re lib bonus
+.PHONY: all clean fclean re bonus

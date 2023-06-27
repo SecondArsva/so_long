@@ -6,11 +6,11 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 06:55:50 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/27 07:04:41 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/27 19:11:33 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
 void	ft_render_overlap(t_mlx *mlx)
 {

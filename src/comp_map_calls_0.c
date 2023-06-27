@@ -6,11 +6,11 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 06:35:55 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/27 07:09:38 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/27 19:53:28 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
 int	ft_comp_map_surrounded(t_mlx *mlx)
 {
@@ -81,12 +81,12 @@ int	ft_comp_map_count_elements(t_mlx *mlx)
 	size_t	i;
 	size_t	j;
 
-	i = 0;
+	i = -1;
 	j = 0;
 	mlx->count_c = 0;
 	mlx->count_e = 0;
 	mlx->count_p = 0;
-	while (mlx->playable_map[i++])
+	while (mlx->playable_map[++i])
 	{
 		while (mlx->playable_map[i][j])
 		{

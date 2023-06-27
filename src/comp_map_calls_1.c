@@ -6,11 +6,11 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 06:40:53 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/27 07:00:40 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/27 19:09:29 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
 int	ft_comp_map_beateable(t_mlx *mlx)
 {
