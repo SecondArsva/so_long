@@ -6,7 +6,7 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 20:40:03 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/26 23:42:31 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/27 07:22:59 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	ft_print_matrix(char **matrix, char *var_name);
 # define DEC_BASE "0123456789"
 # define HEX_BASE_L "0123456789abcdef"
 # define HEX_BASE_U "0123456789ABCDEF"
+
 int		ft_printf_error(char const *str, ...);
 void	ft_putchar_count_error(char c, int *ctr);
 void	ft_putstr_count_error(char *s, int *ctr);
