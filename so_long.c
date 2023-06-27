@@ -6,7 +6,7 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:49:30 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/26 10:31:36 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/27 04:54:51 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	ft_mlx(t_mlx *mlx);
 // del mapa y los sprites.
 static int	ft_create_window(t_mlx *mlx);
 // Crea los punteros que albergarán cada una de las imágenes.
-static void	ft_img_init(t_mlx *mlx);
+static int	ft_img_init(t_mlx *mlx);
 // Llama a las funciones de renderizado.
 static void	ft_render(t_mlx *mlx);
 // Pre y renderiza el suelo con imágenes del char 0.
@@ -59,23 +59,14 @@ static void	ft_move(t_mlx *mlx, int mod_y, int mod_x);
 static void	ft_move_to_element(t_mlx *mlx, int mod_y, int mod_x);
 static void	ft_move_who_am_i(t_mlx *mlx, int mod_y, int mod_x);
 static void	ft_move_print_total_moves(t_mlx *mlx);
-// Función para printear los errores.
-//static void	ft_print_error(char *str);
 // mpizzolo me enseñó esto. Es para cerrar la ventana con la "x".
-int	ft_close_window(t_mlx *mlx);
+int			ft_close_window(t_mlx *mlx);
 
 int	ft_close_window(t_mlx *mlx)
 {
 	mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
 	exit(EXIT_FAILURE);
 }
-/*
-static void	ft_print_error(char *str)
-{
-	ft_putendl_fd(str, 2);
-	exit(1);
-}
-*/
 
 static void	ft_move_print_total_moves(t_mlx *mlx)
 {
@@ -314,9 +305,9 @@ static int	ft_comp_map_beateable(t_mlx *mlx)
 		while (mlx->flood_filled_map[i][j])
 		{
 			if (mlx->flood_filled_map[i][j] == 'E')
-				return (ft_printf("Error\n[x] No se puede alcanzar la salida.\n"), 0);
-			if (mlx->flood_filled_map[i][j] == 'C')
-				return (ft_printf("Error\n[x] No se puede alcanzar alguno de los coleccionables.\n"), 0);
+				return (ft_printf_error(ERROR_REACH_E), 0);
+			else if (mlx->flood_filled_map[i][j] == 'C')
+				return (ft_printf_error(ERROR_REACH_C), 0);
 			j++;
 		}
 		j = 0;
@@ -390,7 +381,7 @@ static int	ft_comp_map_surrounded(t_mlx *mlx)
 				|| (mlx->playable_map[i][0] != '1')
 				|| (mlx->playable_map[i][last_col] != '1')
 				|| (mlx->playable_map[last_row][j] != '1'))
-				return (ft_printf("Error\n[x] El mapa no está rodeado de muros.\n"), 0);
+				return (ft_printf_error(ERROR_SORROUNDED), 0);
 			j++;
 		}
 		j = 0;
@@ -413,7 +404,7 @@ static int	ft_comp_map_rectangle(t_mlx *mlx)
 	{
 		comp_val = ft_strlen(mlx->playable_map[i]);
 		if (comp_val != size_ref)
-			return (ft_printf("Error\n[x] El mapa no es rectangular.\n"), 0);
+			return (ft_printf_error(ERROR_RECTANGLE), 0);
 		i++;
 	}
 	mlx->map_len_x = size_ref;
@@ -423,15 +414,15 @@ static int	ft_comp_map_rectangle(t_mlx *mlx)
 static int	ft_comp_map_elements(t_mlx *mlx)
 {
 	if (mlx->count_c < 1)
-		return (ft_printf("Error\n[x] Ha de haber al menos un coleccionable.\n"), 0);
+		return (ft_printf_error(ERROR_NO_C), 0);
 	if (mlx->count_e < 1)
-		return (ft_printf("Error\n[x] Falta añadir la salida.\n"), 0);
+		return (ft_printf_error(ERROR_NO_E), 0);
 	if (mlx->count_e > 1)
-		return (ft_printf("Error\n[x] Solo puede haber una salida.\n"), 0);
+		return (ft_printf_error(ERROR_A_LOT_E), 0);
 	if (mlx->count_p < 1)
-		return (ft_printf("Error\n[x] Falta añadir un personaje.\n"), 0);
+		return (ft_printf_error(ERROR_NO_P), 0);
 	if (mlx->count_p > 1)
-		return (ft_printf("Error\n[x] Solo puede haber un personaje.\n"), 0);
+		return (ft_printf_error(ERROR_A_LOT_P), 0);
 	return (ft_printf("[v] El mapa tiene los elementos requeridos.\n"), 1);
 }
 
@@ -450,7 +441,7 @@ static int	ft_comp_map_count_elements(t_mlx *mlx)
 		while (mlx->playable_map[i][j])
 		{
 			if (!ft_strchr("01CEP", mlx->playable_map[i][j]))
-				return (ft_printf("Error\n[x] El mapa tiene carácteres inválidos.\n"), 0);
+				return (ft_printf_error(ERROR_INVALID_CHARS), 0);
 			if (mlx->playable_map[i][j] == 'C')
 				mlx->count_c++;
 			else if (mlx->playable_map[i][j] == 'E')
@@ -465,7 +456,7 @@ static int	ft_comp_map_count_elements(t_mlx *mlx)
 	return (1);
 }
 
-static void	ft_img_init(t_mlx *mlx)
+static int	ft_img_init(t_mlx *mlx)
 {
 	mlx->img_width = IMG_WIDTH;
 	mlx->img_height = IMG_HEIGHT;
@@ -476,10 +467,8 @@ static void	ft_img_init(t_mlx *mlx)
 	mlx->img_p = mlx_xpm_file_to_image(mlx->mlx_ptr, IMG_P, &mlx->img_width, &mlx->img_height);
 	if ((!mlx->img_0) || (!mlx->img_1) || (!mlx->img_c)
 		|| (!mlx->img_e) || (!mlx->img_p))
-	{
-		ft_printf("Error\n[x] No se pudo crear correctamente alguna de las imágenes.\n");
-		exit(EXIT_FAILURE);
-	}
+		return (ft_printf_error(ERROR_IMG_PTR), 0);
+	return (1);
 }
 
 static int	ft_create_window(t_mlx *mlx)
@@ -488,7 +477,7 @@ static int	ft_create_window(t_mlx *mlx)
 	mlx->win_y = mlx->map_len_y * IMG_HEIGHT;
 	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, mlx->win_x, mlx->win_y, WIN_TITLE);
 	if (!mlx->win_ptr)
-		return (ft_printf("Error\n[x] El puntero de la ventana no se ha creado.\n"), 0);
+		return (ft_printf_error(ERROR_WIN_PTR), 0);
 	return (1);
 }
 
@@ -537,15 +526,15 @@ static int	ft_comp_map_route(int argc, char **argv, t_mlx *mlx)
 	size_t	len;
 
 	if (argc != 2)
-		return (ft_printf("Error\n[x] Número de argumentos inválido, pelotudo.\n"), 0);
+		return (ft_printf_error(ERROR_INVALID_ARGS), 0);
 	len = ft_strlen(argv[1]);
 	if (len <= ft_strlen("maps/.ber"))
-		return (ft_printf("Error\n[x] El mapa introducido tiene un nombre muy corto.\n"), 0);
+		return (ft_printf_error(ERROR_NAME), 0);
 	if (ft_strncmp(argv[1] + len - 4, ".ber", -1) != 0)
-		return (ft_printf("Error\n[x] El mapa introducido no es un '.ber'.\n"), 0);
+		return (ft_printf_error(ERROR_BER), 0);
 	mlx->fd = open(argv[1], O_RDONLY);
 	if (mlx->fd == -1)
-		return (ft_printf("Error\n[x] No se pudo abrir el archivo correctamente.\n"), 0);
+		return (ft_printf_error(ERROR_FD), 0);
 	return (1);
 }
 
@@ -564,8 +553,8 @@ static int	ft_comp_map(t_mlx *mlx)
 	ft_comp_map_flood_fill(mlx->flood_filled_map, "P1");
 	if (!ft_comp_map_beateable(mlx))
 	{
-		ft_free_matrix(mlx->flood_filled_map);
-		return (0);
+		return (ft_free_matrix(mlx->flood_filled_map),
+				ft_free_matrix(mlx->playable_map), 0);
 	}
 	ft_free_matrix(mlx->flood_filled_map);
 	return (1);
@@ -577,11 +566,11 @@ int	main(int argc, char *argv[])
 
 	mlx = ft_calloc(1, sizeof(t_mlx));
 	if (!mlx)
-		return (ft_printf("Error\nFallo al hacer la reserva del struct."), 0);
+		return (ft_printf_error(ERROR_STRUCT_RESERVE), 0);
 	if (!ft_comp_map_route(argc, argv, mlx))
 		return (free(mlx), 0);
 	if (!ft_comp_map(mlx))
-		return (0);
+		return (free(mlx), 0);
 	ft_mlx(mlx);
 	free(mlx);
 	return (0);

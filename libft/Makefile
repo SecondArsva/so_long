@@ -6,7 +6,7 @@
 #    By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/10 20:00:17 by davidga2          #+#    #+#              #
-#    Updated: 2023/06/23 04:08:14 by davidga2         ###   ########.fr        #
+#    Updated: 2023/06/26 23:43:16 by davidga2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,9 @@ SRC = ft_isalpha.c \
 	  ft_printf_utils.c \
 	  ft_matrixdup.c \
 	  ft_free_matrix.c \
-	  ft_print_matrix.c
+	  ft_print_matrix.c \
+	  ft_printf_error.c \
+	  ft_printf_error_utils.c
 
 # Headers like you see.
 HEADERS = libft.h
