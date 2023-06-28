@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_calls.c                                        :+:      :+:    :+:   */
+/*   mlx_calls_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 06:45:34 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/27 19:10:59 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/29 00:07:36 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	ft_img_init(t_mlx *mlx)
 	mlx->img_p = mlx_xpm_file_to_image(mlx->mlx_ptr,
 			IMG_P, &mlx->img_width, &mlx->img_height);
 	if ((!mlx->img_0) || (!mlx->img_1) || (!mlx->img_c)
-		|| (!mlx->img_e) || (!mlx->img_p))
+		|| (!mlx->img_e) || (!mlx->img_p) || (!mlx->img_n))
 		return (ft_printf_error(ERROR_IMG_PTR), 0);
 	return (1);
 }

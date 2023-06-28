@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:49:47 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/27 19:53:00 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/29 00:05:47 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,16 @@
 
 # define IMG_WIDTH 16
 # define IMG_HEIGHT 32
-# define WIN_TITLE "So_long"
+# define WIN_TITLE "American History X: The Game"
 # define IMG_0 "textures/empty.xpm"
 # define IMG_1 "textures/wall.xpm"
 # define IMG_C "textures/collectable.xpm"
 # define IMG_E "textures/exit.xpm"
-# define IMG_P "textures/player_down.xpm"
+# define IMG_PU "textures/player_up.xpm"
+# define IMG_PD "textures/player_down.xpm"
+# define IMG_PL "textures/player_left.xpm"
+# define IMG_PR "textures/player_right.xpm"
+# define IMG_N "textures/enemy.xpm"
 
 # define ESC 53
 # define W 13
@@ -81,6 +85,8 @@ typedef struct s_mlx{
 	size_t	p_x;
 	size_t	p_y;
 	size_t	move_count;
+	void	*img_n;
+	int		p_lives;
 }			t_mlx;
 
 int		main(int argc, char *argv[]);

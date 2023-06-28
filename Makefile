@@ -6,11 +6,11 @@
 #    By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/04 14:06:19 by davidga2          #+#    #+#              #
-#    Updated: 2023/06/28 00:13:42 by davidga2         ###   ########.fr        #
+#    Updated: 2023/06/29 00:06:43 by davidga2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-### VARIABLES ###
+### MAIN VARIABLES ###
 
 NAME = so_long
 SRC = src/comp_map_calls_0.c 	\
@@ -30,6 +30,19 @@ RM = rm -f
 LIBFT_DIR = libft/
 LIBFT = $(LIBFT_DIR)libft.a
 
+### BONUS ###
+NAME_BONUS = so_long_bonus
+SRC_BONUS = bonus/comp_map_calls_0_bonus.c	\
+			bonus/comp_map_calls_1_bouns.c	\
+			bonus/input_calls_bonus.c		\
+			bonu/main_bonus.c 				\
+			bonus/main_calls_bonus.c 		\
+			bonus/mlx_calls_bonus.c 		\
+			bonus/render_bonus.c 			\
+			bonus/render_calls_0_bonus.c 	\
+			bonus/render_calls_1_bonus.c
+OBJS_BONUS = $(SRC_BONUS:%.c=%.o)
+
 ### RULES ###
 
 all: $(NAME)
@@ -38,7 +51,7 @@ $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CCFLAGS) $(MLX_MAC) $(SRC) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
-	make -C $(LIBFT_DIR)
+	make -c $(LIBFT_DIR)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
@@ -46,12 +59,19 @@ $(LIBFT):
 clean:
 	$(RM) $(OBJS)
 	$(MAKE) clean -C $(LIBFT_DIR)
+	$(RM) $(OBJS_BONUS)
 
 fclean: clean
 	$(RM) $(NAME)
 	$(MAKE) fclean -C $(LIBFT_DIR)
+	$(RM) $(NAME_BONUS)
 
 re: fclean all
 	$(MAKE) re -C $(LIBFT_DIR)
+
+bonus: $(NAME_BONUS)
+
+$(NAME_BONUS): $(OBJS_BONUS) $(LIBFT)
+	$(CC) $(CCFLAGS) $(MLX_MAC) $(SRC_BONUS) $(LIBFT) -o $(NAME_BONUS)
 
 .PHONY: all clean fclean re bonus

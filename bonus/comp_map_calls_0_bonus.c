@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   comp_map_calls_0.c                                 :+:      :+:    :+:   */
+/*   comp_map_calls_0_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 06:35:55 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/27 19:53:28 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/28 23:42:31 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	ft_comp_map_count_elements(t_mlx *mlx)
 	{
 		while (mlx->playable_map[i][j])
 		{
-			if (!ft_strchr("01CEP", mlx->playable_map[i][j]))
+			if (!ft_strchr("01CEPN", mlx->playable_map[i][j]))
 				return (ft_printf_error(ERROR_INVALID_CHARS), 0);
 			if (mlx->playable_map[i][j] == 'C')
 				mlx->count_c++;
