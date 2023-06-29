@@ -6,7 +6,7 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:49:47 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/29 06:39:18 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/29 06:58:36 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void	ft_render_exit(t_mlx *mlx);
 void	ft_render_player(t_mlx *mlx);
 void	ft_render_overlap(t_mlx *mlx);
 int		ft_input(int keycode, t_mlx *mlx);
+void	ft_input_keycode(int keycode, t_mlx *mlx);
 void	ft_move(t_mlx *mlx, int mod_y, int mod_x);
 void	ft_move_to_element(t_mlx *mlx, int mod_y, int mod_x);
 void	ft_move_who_am_i(t_mlx *mlx, int mod_y, int mod_x);
