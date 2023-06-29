@@ -6,11 +6,11 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 06:35:55 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/28 23:42:31 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/29 06:05:49 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 int	ft_comp_map_surrounded(t_mlx *mlx)
 {
@@ -37,7 +37,7 @@ int	ft_comp_map_surrounded(t_mlx *mlx)
 		j = 0;
 		i++;
 	}
-	return (ft_printf("[v] El mapa está rodeado por muros\n"), 1);
+	return (1);
 }
 
 int	ft_comp_map_rectangle(t_mlx *mlx)
@@ -58,7 +58,7 @@ int	ft_comp_map_rectangle(t_mlx *mlx)
 		i++;
 	}
 	mlx->map_len_x = size_ref;
-	return (ft_printf("[v] El mapa es rectangular.\n"), 1);
+	return (1);
 }
 
 int	ft_comp_map_elements(t_mlx *mlx)
@@ -73,7 +73,7 @@ int	ft_comp_map_elements(t_mlx *mlx)
 		return (ft_printf_error(ERROR_NO_P), 0);
 	if (mlx->count_p > 1)
 		return (ft_printf_error(ERROR_A_LOT_P), 0);
-	return (ft_printf("[v] El mapa tiene los elementos requeridos.\n"), 1);
+	return (1);
 }
 
 int	ft_comp_map_count_elements(t_mlx *mlx)
@@ -116,14 +116,14 @@ void	ft_make_matrix(t_mlx *mlx)
 	mlx->map_len_y = 0;
 	while (single_line)
 	{
+		if (single_line[0] == '\n')
+			exit(0);
 		aux_ref = map_line;
 		map_line = ft_strjoin(map_line, single_line);
 		free(aux_ref);
 		free(single_line);
 		mlx->map_len_y++;
 		single_line = get_next_line(mlx->fd);
-		if (single_line == NULL)
-			break ;
 	}
 	free(single_line);
 	mlx->playable_map = ft_split(map_line, '\n');

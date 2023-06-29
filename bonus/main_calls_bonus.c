@@ -6,11 +6,11 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 06:32:30 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/29 00:11:27 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/29 05:11:12 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 int	ft_mlx(t_mlx *mlx)
 {
@@ -21,6 +21,8 @@ int	ft_mlx(t_mlx *mlx)
 	mlx->move_count = 0;
 	mlx_key_hook(mlx->win_ptr, ft_input, mlx);
 	mlx_hook(mlx->win_ptr, 17, 0, ft_close_window, mlx);
+	mlx->p_lives = 3;
+	ft_printf("Total lives: %i\n", mlx->p_lives);
 	mlx_loop(mlx->mlx_ptr);
 	return (0);
 }
@@ -37,7 +39,7 @@ int	ft_comp_map(t_mlx *mlx)
 	if (!ft_comp_map_surrounded(mlx))
 		return (0);
 	mlx->flood_filled_map = ft_matrixdup(mlx->playable_map);
-	ft_comp_map_flood_fill(mlx->flood_filled_map, "P1");
+	ft_comp_map_flood_fill(mlx->flood_filled_map, "P1N");
 	if (!ft_comp_map_beateable(mlx))
 	{
 		return (ft_free_matrix(mlx->flood_filled_map),

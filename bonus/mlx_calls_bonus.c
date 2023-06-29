@@ -6,11 +6,11 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 06:45:34 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/29 00:07:36 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/29 03:39:18 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 int	ft_close_window(t_mlx *mlx)
 {
@@ -21,13 +21,29 @@ int	ft_close_window(t_mlx *mlx)
 int	ft_input(int keycode, t_mlx *mlx)
 {
 	if (keycode == W || keycode == UP)
+	{
+		mlx->img_p = mlx_xpm_file_to_image(mlx->mlx_ptr,
+				IMG_PU, &mlx->img_width, &mlx->img_height);
 		ft_move(mlx, -1, 0);
+	}
 	else if (keycode == S || keycode == DOWN)
+	{
+		mlx->img_p = mlx_xpm_file_to_image(mlx->mlx_ptr,
+				IMG_P, &mlx->img_width, &mlx->img_height);
 		ft_move(mlx, 1, 0);
+	}
 	else if (keycode == A || keycode == LEFT)
+	{
+		mlx->img_p = mlx_xpm_file_to_image(mlx->mlx_ptr,
+				IMG_PL, &mlx->img_width, &mlx->img_height);
 		ft_move(mlx, 0, -1);
+	}
 	else if (keycode == D || keycode == RIGHT)
+	{
+		mlx->img_p = mlx_xpm_file_to_image(mlx->mlx_ptr,
+				IMG_PR, &mlx->img_width, &mlx->img_height);
 		ft_move(mlx, 0, 1);
+	}
 	ft_render(mlx);
 	if (keycode == ESC)
 		exit(0);
@@ -48,6 +64,8 @@ int	ft_img_init(t_mlx *mlx)
 			IMG_E, &mlx->img_width, &mlx->img_height);
 	mlx->img_p = mlx_xpm_file_to_image(mlx->mlx_ptr,
 			IMG_P, &mlx->img_width, &mlx->img_height);
+	mlx->img_n = mlx_xpm_file_to_image(mlx->mlx_ptr,
+			IMG_N, &mlx->img_width, &mlx->img_height);
 	if ((!mlx->img_0) || (!mlx->img_1) || (!mlx->img_c)
 		|| (!mlx->img_e) || (!mlx->img_p) || (!mlx->img_n))
 		return (ft_printf_error(ERROR_IMG_PTR), 0);

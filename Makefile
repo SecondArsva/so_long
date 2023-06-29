@@ -6,11 +6,11 @@
 #    By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/04 14:06:19 by davidga2          #+#    #+#              #
-#    Updated: 2023/06/29 00:06:43 by davidga2         ###   ########.fr        #
+#    Updated: 2023/06/29 02:31:12 by davidga2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-### MAIN VARIABLES ###
+###### MAIN VARIABLES ######
 
 NAME = so_long
 SRC = src/comp_map_calls_0.c 	\
@@ -30,12 +30,13 @@ RM = rm -f
 LIBFT_DIR = libft/
 LIBFT = $(LIBFT_DIR)libft.a
 
-### BONUS ###
+###### BONUS VARIABLES ######
+
 NAME_BONUS = so_long_bonus
 SRC_BONUS = bonus/comp_map_calls_0_bonus.c	\
-			bonus/comp_map_calls_1_bouns.c	\
+			bonus/comp_map_calls_1_bonus.c	\
 			bonus/input_calls_bonus.c		\
-			bonu/main_bonus.c 				\
+			bonus/main_bonus.c 				\
 			bonus/main_calls_bonus.c 		\
 			bonus/mlx_calls_bonus.c 		\
 			bonus/render_bonus.c 			\
@@ -51,7 +52,7 @@ $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CCFLAGS) $(MLX_MAC) $(SRC) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
-	make -c $(LIBFT_DIR)
+	make -C $(LIBFT_DIR)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
@@ -71,7 +72,10 @@ re: fclean all
 
 bonus: $(NAME_BONUS)
 
-$(NAME_BONUS): $(OBJS_BONUS) $(LIBFT)
+$(NAME_BONUS): $(OBJS_BONUS) $(OBJS) $(LIBFT)
 	$(CC) $(CCFLAGS) $(MLX_MAC) $(SRC_BONUS) $(LIBFT) -o $(NAME_BONUS)
 
-.PHONY: all clean fclean re bonus
+rebonus: fclean bonus
+	$(MAKE) re -C $(LIBFT_DIR)
+
+.PHONY: all clean fclean re bonus rebonus

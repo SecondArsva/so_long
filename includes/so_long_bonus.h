@@ -6,7 +6,7 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:49:47 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/29 00:05:47 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/29 03:38:27 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define IMG_C "textures/collectable.xpm"
 # define IMG_E "textures/exit.xpm"
 # define IMG_PU "textures/player_up.xpm"
-# define IMG_PD "textures/player_down.xpm"
+# define IMG_P "textures/player_down.xpm"
 # define IMG_PL "textures/player_left.xpm"
 # define IMG_PR "textures/player_right.xpm"
 # define IMG_N "textures/enemy.xpm"
@@ -117,4 +117,5 @@ void	ft_move_who_am_i(t_mlx *mlx, int mod_y, int mod_x);
 void	ft_move_print_total_moves(t_mlx *mlx);
 int		ft_close_window(t_mlx *mlx);
 
+void	ft_render_enemy(t_mlx *mlx);
 #endif

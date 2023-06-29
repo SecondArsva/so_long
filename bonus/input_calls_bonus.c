@@ -1,16 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_calls.c                                      :+:      :+:    :+:   */
+/*   input_calls_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 06:56:51 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/27 19:09:41 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/29 03:39:21 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
+
+void	ft_enemy_encounter(t_mlx *mlx)
+{
+	mlx->p_lives--;
+	ft_printf("Total lives: %i\n", mlx->p_lives);
+	if (mlx->p_lives <= 0)
+	{
+		ft_printf("[?] GAME OVER - You lose [?]\n");
+		exit(0);
+	}
+}
 
 void	ft_move_print_total_moves(t_mlx *mlx)
 {
@@ -41,6 +52,7 @@ void	ft_move_to_element(t_mlx *mlx, int mod_y, int mod_x)
 		if (mlx->count_c == 0)
 		{
 			ft_move_print_total_moves(mlx);
+			ft_printf("[?] GAME OVER - You win [?]\n");
 			exit(0);
 		}
 		mlx->playable_map[mlx->p_y][mlx->p_x] = '0';
@@ -50,7 +62,9 @@ void	ft_move_to_element(t_mlx *mlx, int mod_y, int mod_x)
 
 void	ft_move(t_mlx *mlx, int mod_y, int mod_x)
 {
-	if (mlx->playable_map[mlx->p_y + mod_y][mlx->p_x + mod_x] != '1')
+	if (mlx->playable_map[mlx->p_y + mod_y][mlx->p_x + mod_x] == 'N')
+		ft_enemy_encounter(mlx);
+	else if (mlx->playable_map[mlx->p_y + mod_y][mlx->p_x + mod_x] != '1')
 	{
 		ft_move_to_element(mlx, mod_y, mod_x);
 		ft_move_who_am_i(mlx, mod_y, mod_x);

@@ -6,11 +6,11 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 06:49:27 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/29 00:08:50 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/29 00:51:10 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 void	ft_render(t_mlx *mlx)
 {

@@ -6,7 +6,7 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 06:40:53 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/27 19:09:29 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/29 03:28:50 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_comp_map_beateable(t_mlx *mlx)
 		j = 0;
 		i++;
 	}
-	return (ft_printf("[v] El mapa es completable.\n"), 1);
+	return (1);
 }
 
 void	ft_flood_fill_if(char **matrix, char *str, size_t i, size_t j)
