@@ -6,7 +6,7 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 06:40:53 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/29 03:24:27 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/29 06:39:09 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,14 @@ void	ft_comp_map_flood_fill(char **matrix, char *str)
 		}
 		j = 0;
 		i++;
+	}
+}
+
+void	ft_empty_line(char *str)
+{
+	if (str[0] == '\n')
+	{
+		ft_printf_error(ERROR_EMPTY_LINE);
+		exit(0);
 	}
 }

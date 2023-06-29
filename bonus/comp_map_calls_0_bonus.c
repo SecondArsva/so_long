@@ -6,7 +6,7 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 06:35:55 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/29 06:05:49 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/29 06:39:11 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,7 @@ void	ft_make_matrix(t_mlx *mlx)
 	mlx->map_len_y = 0;
 	while (single_line)
 	{
-		if (single_line[0] == '\n')
-			exit(0);
+		ft_empty_line(single_line);
 		aux_ref = map_line;
 		map_line = ft_strjoin(map_line, single_line);
 		free(aux_ref);

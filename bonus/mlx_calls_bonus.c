@@ -6,7 +6,7 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 06:45:34 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/29 03:39:18 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/29 06:52:22 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_close_window(t_mlx *mlx)
 	exit(EXIT_FAILURE);
 }
 
-int	ft_input(int keycode, t_mlx *mlx)
+void	ft_input_keycode(int keycode, t_mlx *mlx)
 {
 	if (keycode == W || keycode == UP)
 	{
@@ -44,6 +44,11 @@ int	ft_input(int keycode, t_mlx *mlx)
 				IMG_PR, &mlx->img_width, &mlx->img_height);
 		ft_move(mlx, 0, 1);
 	}
+}
+
+int	ft_input(int keycode, t_mlx *mlx)
+{
+	ft_input_keycode(keycode, mlx);
 	ft_render(mlx);
 	if (keycode == ESC)
 		exit(0);

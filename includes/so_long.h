@@ -6,7 +6,7 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:49:47 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/27 19:53:00 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/29 06:39:14 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # define ERROR_FD "Error\n[x] The file could not be opened correctly.\n"
 # define ERROR_WIN_PTR "Error\n[x] Window pointer reserve failed.\n"
 # define ERROR_IMG_PTR "Error\n[x] Some of the images could not be reserved.\n"
+# define ERROR_EMPTY_LINE "Error\n[x] The readed map has an empty line.\n"
 # define ERROR_INVALID_CHARS "Error\n[x] The map has invalid characters.\n"
 # define ERROR_NO_C "Error\n[x] There must be at least one collectible.\n"
 # define ERROR_NO_E	"Error\n[x] Need to add the exit.\n"
@@ -87,6 +88,7 @@ int		main(int argc, char *argv[]);
 int		ft_comp_map(t_mlx *mlx);
 int		ft_comp_map_route(int argc, char **argv, t_mlx *mlx);
 void	ft_make_matrix(t_mlx *mlx);
+void	ft_empty_line(char *str);
 int		ft_comp_map_count_elements(t_mlx *mlx);
 int		ft_comp_map_elements(t_mlx *mlx);
 int		ft_comp_map_rectangle(t_mlx *mlx);
