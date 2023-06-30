@@ -6,7 +6,7 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 00:52:48 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/30 04:44:09 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/30 18:16:33 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,20 @@
 
 void	ft_user_interface(t_mlx *mlx)
 {
+	char	*steps;
+	char	*lives;
+
+	steps = ft_itoa(mlx->move_count);
+	lives = ft_itoa(mlx->p_lives);
 	mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 3, 0, 16777214,
 		"Steps: ");
-	mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 64, 0, 16777214,
-		ft_itoa(mlx->move_count));
+	mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 64, 0, 16777214, steps);
 	mlx_string_put(mlx->mlx_ptr, mlx->win_ptr,
 		mlx->win_x - 76, mlx->win_y - 32, 16777214, "Lives: ");
 	mlx_string_put(mlx->mlx_ptr, mlx->win_ptr,
-		mlx->win_x - 16, mlx->win_y - 32, 16777214, ft_itoa(mlx->p_lives));
+		mlx->win_x - 16, mlx->win_y - 32, 16777214, lives);
+	free(steps);
+	free(lives);
 }
 
 void	ft_respawn(t_mlx *mlx)
