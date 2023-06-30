@@ -6,7 +6,7 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:49:47 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/29 06:39:14 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/30 05:12:01 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 
 # include "../libft/libft.h"
 # include <mlx.h>
-
-# ifndef MAX_PATH_LENGTH
-#  define MAX_PATH_LENGTH 256
-# endif
 
 # define IMG_WIDTH 16
 # define IMG_HEIGHT 32

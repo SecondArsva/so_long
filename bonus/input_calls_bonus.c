@@ -6,7 +6,7 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 06:56:51 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/29 03:39:21 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/30 02:49:28 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_enemy_encounter(t_mlx *mlx)
 		ft_printf("[?] GAME OVER - You lose [?]\n");
 		exit(0);
 	}
+	ft_respawn(mlx);
 }
 
 void	ft_move_print_total_moves(t_mlx *mlx)

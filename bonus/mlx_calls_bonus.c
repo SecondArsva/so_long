@@ -6,7 +6,7 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 06:45:34 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/29 06:52:22 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/30 04:49:18 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	ft_input(int keycode, t_mlx *mlx)
 {
 	ft_input_keycode(keycode, mlx);
 	ft_render(mlx);
+	ft_user_interface(mlx);
 	if (keycode == ESC)
 		exit(0);
 	return (0);

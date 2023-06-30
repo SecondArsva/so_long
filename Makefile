@@ -6,7 +6,7 @@
 #    By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/04 14:06:19 by davidga2          #+#    #+#              #
-#    Updated: 2023/06/29 02:31:12 by davidga2         ###   ########.fr        #
+#    Updated: 2023/06/30 02:52:52 by davidga2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ SRC_BONUS = bonus/comp_map_calls_0_bonus.c	\
 			bonus/mlx_calls_bonus.c 		\
 			bonus/render_bonus.c 			\
 			bonus/render_calls_0_bonus.c 	\
-			bonus/render_calls_1_bonus.c
+			bonus/render_calls_1_bonus.c	\
+			bonus/addons_bonus.c
 OBJS_BONUS = $(SRC_BONUS:%.c=%.o)
 
 ### RULES ###

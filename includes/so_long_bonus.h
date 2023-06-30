@@ -6,7 +6,7 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:49:47 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/29 06:58:36 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/30 04:56:12 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 
 # include "../libft/libft.h"
 # include <mlx.h>
-
-# ifndef MAX_PATH_LENGTH
-#  define MAX_PATH_LENGTH 256
-# endif
 
 # define IMG_WIDTH 16
 # define IMG_HEIGHT 32
@@ -88,6 +84,8 @@ typedef struct s_mlx{
 	size_t	move_count;
 	void	*img_n;
 	int		p_lives;
+	size_t	e_x;
+	size_t	e_y;
 }			t_mlx;
 
 int		main(int argc, char *argv[]);
@@ -121,4 +119,6 @@ void	ft_move_print_total_moves(t_mlx *mlx);
 int		ft_close_window(t_mlx *mlx);
 
 void	ft_render_enemy(t_mlx *mlx);
+void	ft_user_interface(t_mlx *mlx);
+void	ft_respawn(t_mlx *mlx);
 #endif

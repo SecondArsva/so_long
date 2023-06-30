@@ -6,7 +6,7 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 06:53:05 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/29 00:49:22 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/30 02:49:26 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	ft_render_exit(t_mlx *mlx)
 			{
 				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_e,
 					j * IMG_WIDTH, i * IMG_HEIGHT);
+				mlx->e_y = i;
+				mlx->e_x = j;
 			}
 			j++;
 		}

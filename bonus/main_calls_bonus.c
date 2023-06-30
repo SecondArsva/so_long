@@ -6,7 +6,7 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 06:32:30 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/29 05:11:12 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/30 04:47:38 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	ft_mlx(t_mlx *mlx)
 	mlx_hook(mlx->win_ptr, 17, 0, ft_close_window, mlx);
 	mlx->p_lives = 3;
 	ft_printf("Total lives: %i\n", mlx->p_lives);
+	ft_user_interface(mlx);
 	mlx_loop(mlx->mlx_ptr);
 	return (0);
 }
