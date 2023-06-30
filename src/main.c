@@ -6,22 +6,16 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 06:31:39 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/30 05:21:44 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/30 17:26:13 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	ft_l(void)
-{
-	system("leaks so_long");
-}
-
 int	main(int argc, char *argv[])
 {
 	t_mlx	*mlx;
 
-	atexit(ft_l);
 	mlx = ft_calloc(1, sizeof(t_mlx));
 	if (!mlx)
 		return (ft_printf_error(ERROR_STRUCT_RESERVE), 0);

@@ -6,7 +6,7 @@
 /*   By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 06:32:30 by davidga2          #+#    #+#             */
-/*   Updated: 2023/06/30 05:30:10 by davidga2         ###   ########.fr       */
+/*   Updated: 2023/06/30 17:15:33 by davidga2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ int	ft_comp_map(t_mlx *mlx)
 {
 	ft_make_matrix(mlx);
 	if (!ft_comp_map_count_elements(mlx))
-		return (0);
+		return (ft_free_matrix(mlx->playable_map), 0);
 	if (!ft_comp_map_elements(mlx))
-		return (0);
+		return (ft_free_matrix(mlx->playable_map), 0);
 	if (!ft_comp_map_rectangle(mlx))
-		return (0);
+		return (ft_free_matrix(mlx->playable_map), 0);
 	if (!ft_comp_map_surrounded(mlx))
-		return (0);
+		return (ft_free_matrix(mlx->playable_map), 0);
 	mlx->flood_filled_map = ft_matrixdup(mlx->playable_map);
 	ft_comp_map_flood_fill(mlx->flood_filled_map, "P1");
 	if (!ft_comp_map_beateable(mlx))
