@@ -63,3 +63,16 @@ int	ft_comp_map_route(int argc, char **argv, t_mlx *mlx)
 		return (ft_printf_error(ERROR_FD), 0);
 	return (1);
 }
+
+int	ft_image_existence(t_mlx *mlx)
+{
+	mlx->fd_0 = open(IMG_0, O_RDONLY);
+	mlx->fd_1 = open(IMG_1, O_RDONLY);
+	mlx->fd_c = open(IMG_C, O_RDONLY);
+	mlx->fd_e = open(IMG_E, O_RDONLY);
+	mlx->fd_p = open(IMG_P, O_RDONLY);
+	if (mlx->fd_0 < 0 || mlx->fd_1 < 0 || mlx->fd_c < 0
+		|| mlx->fd_e < 0 || mlx->fd_p < 0)
+		return (ft_printf_error(ERROR_IMG_EXIST), 0);
+	return (1);
+}

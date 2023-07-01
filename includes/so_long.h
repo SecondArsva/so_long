@@ -36,6 +36,7 @@
 # define RIGHT 124
 
 # define ERROR_STRUCT_RESERVE "Error\n[x] Struct reserve failed.i\n"
+# define ERROR_IMG_EXIST "Error\n[x] Some of the images could not be found\n"
 # define ERROR_INVALID_ARGS	"Error\n[x] Invalid number of arguments.\n"
 # define ERROR_NAME "Error\n[x] The introduced map has a very short name.\n"
 # define ERROR_BER "Error\n[x] The introduced map is not a '.ber'.\n"
@@ -56,6 +57,11 @@
 
 typedef struct s_mlx{
 	int		fd;
+	int		fd_0;
+	int		fd_1;
+	int		fd_c;
+	int		fd_e;
+	int		fd_p;
 	void	*mlx_ptr;
 	void	*win_ptr;
 	size_t	win_x;
@@ -81,6 +87,7 @@ typedef struct s_mlx{
 }			t_mlx;
 
 int		main(int argc, char *argv[]);
+int		ft_image_existence(t_mlx *mlx);
 int		ft_comp_map(t_mlx *mlx);
 int		ft_comp_map_route(int argc, char **argv, t_mlx *mlx);
 void	ft_make_matrix(t_mlx *mlx);

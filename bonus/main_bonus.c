@@ -19,6 +19,8 @@ int	main(int argc, char *argv[])
 	mlx = ft_calloc(1, sizeof(t_mlx));
 	if (!mlx)
 		return (ft_printf_error(ERROR_STRUCT_RESERVE), 0);
+	if (!ft_image_existence(mlx))
+		return (free(mlx), 0);
 	if (!ft_comp_map_route(argc, argv, mlx))
 		return (free(mlx), 0);
 	if (!ft_comp_map(mlx))
