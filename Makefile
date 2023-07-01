@@ -6,7 +6,7 @@
 #    By: davidga2 <davidga2@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/04 14:06:19 by davidga2          #+#    #+#              #
-#    Updated: 2023/06/30 02:52:52 by davidga2         ###   ########.fr        #
+#    Updated: 2023/07/01 05:42:37 by davidga2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,6 @@ fclean: clean
 	$(RM) $(NAME_BONUS)
 
 re: fclean all
-	$(MAKE) re -C $(LIBFT_DIR)
 
 bonus: $(NAME_BONUS)
 
@@ -77,6 +76,5 @@ $(NAME_BONUS): $(OBJS_BONUS) $(OBJS) $(LIBFT)
 	$(CC) $(CCFLAGS) $(MLX_MAC) $(SRC_BONUS) $(LIBFT) -o $(NAME_BONUS)
 
 rebonus: fclean bonus
-	$(MAKE) re -C $(LIBFT_DIR)
 
 .PHONY: all clean fclean re bonus rebonus
